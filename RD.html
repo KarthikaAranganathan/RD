@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RD Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+      }
+      label {
+        display: block;
+        margin: 10px 0;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #result {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>RD Calculator</h1>
+      <label for="principal">Principal Amount (₹):</label>
+      <input
+        type="text"
+        id="principal"
+        placeholder="Enter the principal amount"
+      />
+      <label for="rate">Interest Rate (%):</label>
+      <input
+        type="text"
+        id="rate"
+        placeholder="Enter the annual interest rate"
+      />
+      <label for="time">Time (months):</label>
+      <input type="text" id="time" placeholder="Enter the number of months" />
+      <button onclick="calculateRD()">Calculate</button>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      function calculateRD() {
+        var principal = parseFloat(document.getElementById("principal").value);
+        var rate = parseFloat(document.getElementById("rate").value);
+        var time = parseFloat(document.getElementById("time").value);
+
+        if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+          alert("Please enter valid numbers for all fields.");
+          return;
+        }
+
+        rate = rate / 100; // Convert to decimal
+        var monthlyRate = rate / 12;
+        var totalAmount = 0;
+
+        for (var i = 1; i <= time; i++) {
+          totalAmount += principal * monthlyRate;
+        }
+
+        document.getElementById("result").innerHTML =
+          "Total Amount after " + time + " months: ₹" + totalAmount.toFixed(2);
+      }
+    </script>
+  </body>
+</html>
